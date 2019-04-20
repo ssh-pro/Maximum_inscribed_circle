@@ -13,7 +13,7 @@ from numba.decorators import jit
 @jit
 def circle_checker(centerX,centerY,location):
     l=[]
-    for x,y in location:    
+    for x,y in  location
         radius=np.sqrt((y-centerY)**2+(x-centerX)**2)
         l.append(radius)
     return l
@@ -42,32 +42,58 @@ def image_location(img,mode):
                 pass
     return res
 
-t=image_location("daen.jpg",2)
+#t=image_location("daen.jpg",2)
+
 
 
 ##
-# 初期値を書く
-# 大きくして行く(rを)
-#　どこかでぶつかるから,それをずらす.
-# また大きくする
-# 大きくしきれなければそれが解
+##中心と半径をいじって行って.
+##最大になるまでやる
+##やり方
 ##
-
-#初期値
-X=200
-Y=100
-R=70
-
-#Rを大きくして行く
-#Rとradiusが等しくなったら.
-#ちょこっと動かす.
+##半径をまず決めて.範囲内で動かしまくる.
+##だんだん半径をでかくする.
 
 
 
-res=circle_checker(X,Y,t)
+#線画にした
+mv=cv2.imread("output.jpg",0)
+ret,thresh1 = cv2.threshold(mv,127,255,cv2.THRESH_BINARY)
+cv2.imwrite("tes.jpg",thresh1)
 
 
+#choose which image u d like to use
+#どちらにしろ三平方の丸め誤差が聞いてきます
+#1 輪郭に厚みがあります
+#image_location=image_location("daen.jpg",0)
 
+#2 厚みはありません
+image_location=image_location("tes.jpg",0)
+
+cx=200
+cy=50
+cr=20
+
+
+for a in l2:
+    print(a[0])
+    print(a[1])
+
+#一つのRについて
+#l2=[]
+while len(l2) < 3:
+    cr=cr+1
+    l2=[]
+    for x,y in image_location:
+        if np.abs(cr - (circle_checker(cx,cy,x,y))) < 2:
+            l=[]
+            l.append(x)
+            l.append(y)
+            l2.append(l)
+        else:
+            pass
+#appendしたら,X,Yを2ほど進めてやる
+#そうすれば一個だけもとまる
 
 
 
