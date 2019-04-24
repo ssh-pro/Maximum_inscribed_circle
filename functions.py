@@ -123,6 +123,7 @@ def mover(location_list,center_x,center_y,radius):
         #最も遠い点を結ぶ線分とその線分の垂直二等分線の交点をHとすると,
         H=[wx1+move_x,wy1+move_y]
         #のように書くことができる.(x,yの正負によって変化する)
+        #Hがわかると,上のif文のように,一点で交わる場合と同じである.
 
 def circle_writer(img_hig,img_wid,cx,cy,r):
     img = np.ones((img_wid,img_hig),np.uint8)*255
