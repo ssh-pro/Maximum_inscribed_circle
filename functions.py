@@ -70,6 +70,59 @@ def wa(comp,exdir1,size):
     cv2.imwrite(exdir1,im)
 
 
+def mover(location_list,center_x,center_y,radius):
+    if len(location_list)<2:
+        touch_x=location[0][0]
+        touch_y=location[0][1]
+        
+        #中心からの差を求める
+        if center_x < touch_x:
+            move_x=touch_x-center_x
+        else:
+            move_x=center_x-touch_x
+            
+        if center_y < touch_y:
+            move_y=touch_y-center_y
+        else:
+            move_y=center_y-touch_y
+        
+        
+        #動かす方向を決める 真上=0 時計回り
+        if move_y+move_x==radius:
+            if gy>0:    
+                theta=0
+            else:
+                theta=270
+
+        if move_y+move_x==-radius:
+            if gy<0:    
+                theta=90
+            else:
+                theta=180            
+        
+        #45度は,比率が大体1:1+sqrt(2)くらいになる
+    
+    else:
+        #複数の点で接する場合.
+        #二重ループになってしまうため,最適な手法を考えて欲しい.
+        
+
+        #最も遠い二点
+        w1=[wx1,wy1]
+        w2=[wx2,wy2]
+        if wx1 < wx2:
+            move_x=wx2-wx1
+        else:
+            move_x=wx1-wx2
+            
+        if wy1 < wy2:
+            move_y=wy2-wy1
+        else:
+            move_y=wy1-wy2      
+        
+        #最も遠い点を結ぶ線分とその線分の垂直二等分線の交点をHとすると,
+        H=[wx1+move_x,wy1+move_y]
+        #のように書くことができる.(x,yの正負によって変化する)
 
 def circle_writer(img_hig,img_wid,cx,cy,r):
     img = np.ones((img_wid,img_hig),np.uint8)*255
