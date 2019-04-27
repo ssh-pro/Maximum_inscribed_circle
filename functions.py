@@ -124,7 +124,12 @@ def mover(location_list,center_x,center_y,radius):
         H=[wx1+move_x,wy1+move_y]
         #のように書くことができる.(x,yの正負によって変化する)
         #Hがわかると,上のif文のように,一点で交わる場合と同じである.
-
+    
+    #そのあとに,
+    #forループとtryを組み合わせて限界まで回す.
+    #この関数を別でラップする関数を持ってきて,
+    #そいつの中でtry for したほうが多分きっと楽.
+    
 def circle_writer(img_hig,img_wid,cx,cy,r):
     img = np.ones((img_wid,img_hig),np.uint8)*255
     cv2.circle(img, (cx, cy), r, (0, 0, 0), thickness=1)
